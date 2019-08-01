@@ -19,22 +19,38 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/newsscraper", { useNewUrlParser: true });
 
 app.get("/scrape", function (req, res) {
-    axios.get("http://www.echojs.com/").then(function (response) {
+    // axios.get("http://www.echojs.com/").then(function (response) {
+    //     var $ = cheerio.load(response.data);
+
+    //     $("article h2").each(function (i, element) {
+    //         var result = {};
+
+    //         result.title = $(this).children("a").text();
+    //         result.link = $(this).children("a").attr("href");
+
+    //         db.Article.create(result).then(function (dbArticle) {
+    //             console.log(dbArticle);
+    //         }).catch(function (err) {
+    //             console.log(err);
+    //         });
+    //     });
+    // });
+    axios.get("https://old.reddit.com/r/worldnews").then(function(response){
         var $ = cheerio.load(response.data);
 
-        $("article h2").each(function (i, element) {
+        $("p.title").each(function(i, element){
             var result = {};
 
-            result.title = $(this).children("a").text();
-            result.link = $(this).children("a").attr("href");
+            result.title = $(element).text();
+            result.link = $(element).children().attr("href");
 
-            db.Article.create(result).then(function (dbArticle) {
+            db.Article.create(result).then(function(dbArticle){
                 console.log(dbArticle);
-            }).catch(function (err) {
+            }).catch(function(err){
                 console.log(err);
-            });
-        });
-    });
+            })
+        })
+    })
     res.send("Scrape Complete");
 });
 
