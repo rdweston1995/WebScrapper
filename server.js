@@ -45,7 +45,7 @@ app.get("/scrape", function (req, res) {
             result.link = $(element).children().attr("href");
 
             db.Article.create(result).then(function(dbArticle){
-                console.log(dbArticle);
+                // console.log(dbArticle);
             }).catch(function(err){
                 console.log(err);
             })
@@ -54,8 +54,28 @@ app.get("/scrape", function (req, res) {
     res.send("Scrape Complete");
 });
 
-app.get("/articles", function (req, res) {
-    db.Article.find({}).then(function (dbArticle) {
+app.get("/scrape/:subreddit", function(req, res){
+    axios.get("https://old.reddit.com/r/" + req.params.subreddit).then(function(response){
+        var $ = cheerio.load(response.data);
+
+        $("p.title").each(function(i, element){
+            var result = {};
+
+            result.title = $(element).text();
+            result.link = $(element).children().attr("href");
+            result.subreddit = req.params.subreddit;
+
+            db.Article.create(result).then(function(dbArticle){
+                // console.log(dbArticle);
+            }).catch(function(err){
+                // console.log(err);
+            });
+        });
+    });
+})
+
+app.get("/articles/:subreddit", function (req, res) {
+    db.Article.find({subreddit: req.params.subreddit}).then(function (dbArticle) {
         res.json(dbArticle);
     }).catch(function (err) {
         res.json(err);

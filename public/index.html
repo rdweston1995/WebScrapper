@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head>
-        <meta charset="UTF-8">
-        <title>Web Scraping</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Scraping</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="./style.css">
-    </head>
-    <body>
-        <h1>Reddit News Scraper</h1>
-        <div class="row"id="wrapper">
-            
-            <div id="subreddits"></div>
-            <div class="col-6" id="articles"></div>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Reddit News Scraper</h1>
+            <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+        </div>
+    </div>
+    <!-- <h1>Reddit News Scraper</h1> -->
+    <div class="row" id="wrapper">
+        <div class="col-12" id="subreddits">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <!-- <a class="nav-link active" href="#">World News</a> -->
+                    <!-- <p>World News</p> -->
+                    <button class="subBtn">World News</button>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#">News</a> -->
+                    <button class="subBtn">News</button>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#">Politics</a> -->
+                    <button class="subBtn">Politics</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12" id="articlesComments">
+            <div class="col-6" id="articles">
+                <p>Select one of the buttons above to get new articles</p>
+            </div>
             <div class="col-4" id="comments"></div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="app.js"></script>
-    </body>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
 </html>

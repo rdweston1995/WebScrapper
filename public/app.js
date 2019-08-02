@@ -1,8 +1,34 @@
-$.getJSON("/articles", function(data){
-    for(var i = 0; i < data.length; i++){
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br></p><a href='" + data[i].link + "' target='_blank'>" + data[i].link + "<hr>");
-    }
-})
+// $.getJSON("/articles", function(data){
+//     for(var i = 0; i < data.length; i++){
+//         $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br></p><a href='" + data[i].link + "' target='_blank'>" + data[i].link + "<hr>");
+//     }
+// })
+
+$(".subBtn").on("click", function(){
+    let subreddit = $(this).text().split(" ").join("").toLowerCase();
+    console.log(subreddit);
+    $("#articles").empty();
+    $.get("/scrape/" + subreddit, function(data){
+        // console.log("APP ++++++++++++++" + data);
+        console.log(data);
+        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br></p><a href='" + data[i].link + "' target='_blank'>" + data[i].link + "<hr>");
+
+        // $.getJSON("/articles/" + subreddit, function(data){
+        //     for(var i = 0; i < data.length; i++){
+        //         $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br></p><a href='" + data[i].link + "' target='_blank'>" + data[i].link + "<hr>");
+        //     }
+        // })
+    }).then(getArticles(subreddit));
+});
+
+function getArticles(subReddit){
+    $("#articles").empty();
+    $.getJSON("/articles/" + subReddit, function(data){
+        for(var i = 0; i < data.length; i++){
+            $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br></p><a href='" + data[i].link + "' target='_blank'>" + data[i].link + "<hr>");
+        }
+    });
+}
 
 $(document).on("click", "p", function(){
     $("#comments").empty();

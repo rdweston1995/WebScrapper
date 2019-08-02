@@ -5,14 +5,34 @@ body { background-color: #4E878C}
             margin-right: auto;
             padding-top: 5%;
         } */
+
+        #wrapper{
+            background-color: #ffffff;
+            margin: 0 20px 0 20px;
+            border-radius: 5px;
+        }
+        /* #subreddits, #articlesComments{
+            float:left;
+        } */
+        .nav{
+            margin-left: auto;
+        }
+
+        .subBtn{
+            margin: 15px;
+            background-color: #D9DCD6;
+            border-radius: 5px;
+            padding: 15px;
+        }
         #articles {
             /* display: inline-block; */
             overflow: auto;
             width: 50%;
             height: 700px;
-            background-color: #ffffff;
+            background-color: #D9DCD6;
             padding: 20px;
-            margin-left: 200px;
+            margin: 15px 0 0 0;
+            /* margin-left: 200px; */
         }
         #comments {
             float:right;
