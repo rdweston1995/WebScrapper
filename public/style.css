@@ -27,7 +27,7 @@ body { background-color: #4E878C}
         #articles {
             /* display: inline-block; */
             overflow: auto;
-            width: 50%;
+            width: 100rem;
             height: 700px;
             background-color: #D9DCD6;
             padding: 20px;
@@ -37,6 +37,9 @@ body { background-color: #4E878C}
         #comments {
             float:right;
             width: 30%;
+            /* position: relative; */
+            /* top: 0px; */
+            /* right:  */
         }
         textarea, input {
             display: block;

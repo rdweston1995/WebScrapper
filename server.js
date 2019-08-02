@@ -74,7 +74,7 @@ app.get("/scrape/:subreddit", function(req, res){
     });
 })
 
-app.get("/articles/:subreddit", function (req, res) {
+app.get("/articles/subreddit/:subreddit", function (req, res) {
     db.Article.find({subreddit: req.params.subreddit}).then(function (dbArticle) {
         res.json(dbArticle);
     }).catch(function (err) {

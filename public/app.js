@@ -23,7 +23,7 @@ $(".subBtn").on("click", function(){
 
 function getArticles(subReddit){
     $("#articles").empty();
-    $.getJSON("/articles/" + subReddit, function(data){
+    $.getJSON("/articles/subreddit/" + subReddit, function(data){
         for(var i = 0; i < data.length; i++){
             $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br></p><a href='" + data[i].link + "' target='_blank'>" + data[i].link + "<hr>");
         }
