@@ -85,8 +85,15 @@ app.get("/articles/subreddit/:subreddit", function (req, res) {
     });
 });
 
-app.get("/articles/:id", function(req, res){
-    db.Article.findOne({_id: req.params.id}).populate("comment").then(function(dbArticle){
+// app.get("/articles/:id", function(req, res){
+//     db.Article.find({_id: req.params.id}).populate("comment").then(function(dbArticle){
+//         res.json(dbArticle);
+//     }).catch(function(err){
+//         res.json(err);
+//     });
+// });
+app.get("/articles/:articleTitle", function(req, res){
+    db.Article.find({title: req.params.articleTitle}).populate("comment").then(function(dbArticle){
         res.json(dbArticle);
     }).catch(function(err){
         res.json(err);
@@ -94,14 +101,21 @@ app.get("/articles/:id", function(req, res){
 });
 
 app.post("/articles/:id", function(req, res){
-    db.Comment.create(req.body).then(function(dbComment){
-        return db.Article.findOneAndUpdate({_id: req.params.id}, {comment: dbComment._id}, {new:true});
-    }).then(function(dbArticle){
-        res.json(dbArticle);
-    }).catch(function(err){
-        res.json(err);
+    // db.Comment.create(req.body).then(function(dbComment){
+    //     return db.Article.findOneAndUpdate({_id: req.params.id}, {comment: dbComment._id}, {new:true});
+    // }).then(function(dbArticle){
+    //     res.json(dbArticle);
+    // }).catch(function(err){
+    //     res.json(err);
+    // })
+    db.Comment.create(req.body, function(error, saved){
+        if(error){
+            console.log(error);
+        } else {
+            res.send(saved);
+        }
     })
-})
+});
 
 app.listen(PORT, function () {
     console.log("App is running on port " + PORT + "!");

@@ -39,16 +39,16 @@ $(document).on("click", "p", function(){
         url: "/articles/" + thisId
     }).then(function(data){
         console.log(data);
-        $("#comments").append("<h2>" + data.title + "</h2>");
+        $("#comments").append("<h2 id='articleTitle'>" + data.title + "</h2>");
         $("#comments").append("<input id='titleinput' name='title' >");
         $("#comments").append("<textarea id='bodyinput' name'body'></textarea>");
         $("#comments").append("<button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
-
+        $("#commentsDb").append("<p id='commentsCollection'></p>");
         if(data.comment){
             $("#titleinput").val(data.comment.title);
             $("#bodyinput").val(data.comment.body);
         }
-    })
+    });
 });
 
 $(document).on("click", "#savecomment", function(){
@@ -56,9 +56,10 @@ $(document).on("click", "#savecomment", function(){
 
     $.ajax({
         method: "POST",
-        url: "/articles/" + thisId,
+        url: "/articles/" + $("#articleTitle").val(),
         data: {
-            title: $("#titleinput").val(),
+            // title: $("#titleinput").val(),
+            title: $("#articleTitle").val(),
             bpdy: $("#bodyinput").val()
         }
     }).then(function(data){
