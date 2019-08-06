@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/redditNewsScraper";
 // mongoose.connect("mongodb://localhost/newsscraper", { useNewUrlParser: true });
 mongoose.connect(MONGODB_URI)
 
@@ -108,6 +108,7 @@ app.post("/articles/:id", function(req, res){
     // }).catch(function(err){
     //     res.json(err);
     // })
+    console.log(req.body);
     db.Comment.create(req.body, function(error, saved){
         if(error){
             console.log(error);
